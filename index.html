@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mubarak Ali | Full-Stack Expert</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --accent: #00ffaa; /* Neon Mint - Modern & Energetic */
+            --bg: #050505;
+            --card-bg: #0f0f0f;
+            --text-main: #ffffff;
+            --text-secondary: #999;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { background-color: var(--bg); color: var(--text-main); overflow-x: hidden; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; padding: 15px 30px;
+            background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 100px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 2000; transition: var(--transition);
+        }
+
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-secondary);
+            font-weight: 500; font-size: 0.9rem; transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hamburger Icon */
+        .hamburger { display: none; cursor: pointer; color: white; font-size: 1.5rem; }
+
+        /* --- Hero --- */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 10%; gap: 50px;
+        }
+        .hero-content h1 { font-size: clamp(3rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero-content p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 30px; max-width: 500px; }
+
+        .hero-img-box {
+            position: relative; width: 400px; height: 500px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            border-radius: 40px; overflow: hidden;
+        }
+        .hero-img-box img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: luminosity; }
+
+        /* --- About & Skills --- */
+        section { padding: 100px 10%; }
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 10px; }
+
+        .skill-item { margin-bottom: 25px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; }
+        .skill-bar-bg { height: 6px; width: 100%; background: #1a1a1a; border-radius: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--accent); width: 0; transition: 2s ease; }
+
+        /* --- Projects Grid --- */
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
+        }
+        .project-card {
+            background: var(--card-bg); border-radius: 24px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .proj-img { height: 220px; background: #222; overflow: hidden; }
+        .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .project-card:hover .proj-img img { transform: scale(1.1); }
+        .proj-body { padding: 25px; }
+        .proj-link { color: var(--accent); font-size: 1.2rem; margin-top: 15px; display: inline-block; }
+
+        /* --- Testimonials --- */
+        .testimonials { background: #0a0a0a; border-radius: 40px; padding: 60px; text-align: center; }
+        .testi-card { max-width: 700px; margin: 0 auto; }
+        .testi-card p { font-size: 1.5rem; font-style: italic; color: #eee; margin-bottom: 20px; }
+        .testi-card h4 { color: var(--accent); font-size: 1.1rem; }
+
+        /* --- Footer --- */
+        footer { padding: 80px 10% 40px; border-top: 1px solid #111; }
+        .footer-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .socials { display: flex; gap: 15px; }
+        .socials a {
+            width: 45px; height: 45px; border-radius: 50%; border: 1px solid #222;
+            display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; text-decoration: none;
+        }
+        .socials a:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        /* WhatsApp Button */
+        .wa-btn {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366;
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 25px; color: white;
+            z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); text-decoration: none;
+        }
+
+        /* --- Mobile Styles --- */
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
+            .hero-img-box { width: 100%; max-width: 300px; height: 380px; }
+            .hamburger { display: block; }
+            .nav-links {
+                display: none; position: absolute; top: 80px; left: 0; width: 100%;
+                background: #111; padding: 20px; flex-direction: column; border-radius: 20px;
+                text-align: center; border: 1px solid #222;
+            }
+            .nav-links.active { display: flex; }
+            .section-header h2 { font-size: 2.2rem; }
+            .about-grid { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Mubarak<span>.</span></div>
+        <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Building <span style="color: var(--accent);">Digital</span><br>Excellence</h1>
+            <p>I build high-performance websites that look amazing and rank higher. Turning your ideas into digital reality.</p>
+            <a href="https://wa.me/923408019976" style="background: var(--accent); color: #000; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800;">HIRE ME</a>
+        </div>
+        <div class="hero-img-box">
+            <img src="img/ali.jpg" alt="Mubarak Ali">
+        </div>
+    </section>
+
+    <section id="about">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;" class="about-grid">
+            <div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">I bridge the gap between <br> <span style="color: var(--accent);">Design & Tech.</span></h2>
+                <p style="color: var(--text-secondary); line-height: 1.8;">With years of experience in Web Development and SEO, I specialize in creating fast, scalable, and visually stunning solutions that help brands dominate the digital landscape.</p>
+            </div>
+            <div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>HTML/CSS/Bootstrap</span><span>95%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-progress" data-done="95%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>JavaScript / React</span><span>88%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-progress" data-done="88%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>WordPress / Shopify</span><span>92%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-progress" data-done="92%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>SEO / Marketing</span><span>80%</span></div>
+                    <div class="skill-bar-bg"><div class="skill-progress" data-done="80%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" style="background: #080808;">
+        <div class="section-header">
+            <h2 style="font-size: 3rem; margin-bottom: 10px;">Expert <span style="color: var(--accent);">Services</span></h2>
+            <p style="color: var(--text-secondary); max-width: 600px;">I provide end-to-end digital solutions to help your business grow and stand out in the competitive market.</p>
+        </div>
+
+        <div class="services-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+            
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fas fa-code" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">Web Development</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Building robust, scalable, and high-performance websites using modern technologies like React, JavaScript, and PHP.</p>
+            </div>
+
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fas fa-bezier-curve" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">Web Design</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Creating stunning UI/UX designs that provide a seamless user journey and reflect your brand's unique identity.</p>
+            </div>
+
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fas fa-chart-line" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">SEO Optimization</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Optimizing your digital presence to rank #1 on search engines, driving organic traffic and increasing visibility.</p>
+            </div>
+
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fas fa-palette" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">Graphic Designing</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Crafting professional logos, branding materials, and social media graphics that capture your audience's attention.</p>
+            </div>
+
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fas fa-shopping-basket" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">E-Commerce</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Developing secure and scalable online stores with smooth checkout experiences and payment integrations.</p>
+            </div>
+
+            <div class="service-card" style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition);">
+                <div style="width: 60px; height: 60px; background: rgba(0, 255, 170, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <i class="fab fa-shopify" style="color: var(--accent); font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 15px; font-size: 1.4rem;">Shopify Store</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6;">Specialized Shopify theme customization, app setup, and complete store management for your retail business.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--accent) !important;
+            box-shadow: 0 15px 30px rgba(0, 255, 170, 0.1);
+        }
+    </style>
+
+    <section id="projects">
+        <div class="section-header"><h2>Featured Work</h2></div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="proj-img"><img src="img/foot.png"></div>
+                <div class="proj-body">
+                    <h3>Foot on Kili Tanzania</h3>
+                    <p style="color: var(--text-secondary);">Adventure & Trekking platform.</p>
+                    <a href="https://www.footonkilitanzaniaadventure.com/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="proj-img"><img src="img/qz.png" alt="Car"></div>
+                <div class="proj-body">
+                    <h3>QZ Rent A Car</h3>
+                    <p style="color: var(--text-secondary);">Premium car rental services.</p>
+                    <a href="https://www.qzrentacar.com/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="proj-img"><img src="img/skyline.png" alt="Skyline"></div>
+                <div class="proj-body">
+                    <h3>Skyline Adventure Tours</h3>
+                    <p style="color: var(--text-secondary);">Tourism & Tour management site.</p>
+                    <a href="https://armanali0312112-byte.github.io/SkylineAdventureTours/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="proj-img"><img src="img/gelexy.png" alt="Galaxy"></div>
+                <div class="proj-body">
+                    <h3>Gelexy Construction</h3>
+                    <p style="color: var(--text-secondary);">Industrial construction website.</p>
+                    <a href="https://armanali0312112-byte.github.io/Gelexy-Construction-Service/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="proj-img"><img src="img/bright.png" alt="Brightline"></div>
+                <div class="proj-body">
+                    <h3>Brightline Creations</h3>
+                    <p style="color: var(--text-secondary);">Creative Agency Portfolio.</p>
+                    <a href="https://armanali0312112-byte.github.io/Brightline-Creations/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="proj-img"><img src="img/ma.png" alt="Portfolio"></div>
+                <div class="proj-body">
+                    <h3>MA Academy</h3>
+                    <p style="color: var(--text-secondary);">An Academy website to leran Web Development.</p>
+                    <a href="https://armanali0312112-byte.github.io/MA-Academy/" class="proj-link"><i class="fas fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="testimonials" style="background: #050505; overflow: hidden;">
+        <div class="section-header" style="text-align: center;">
+            <h2 style="font-size: 2.5rem;">Client <span style="color: var(--accent);">Feedback</span></h2>
+            <p style="color: var(--text-secondary);">What people say about my recent projects</p>
+        </div>
+        
+        <div class="testimonials">
+            <div class="testi-card testimonial-slide active">
+                <div class="quote-icon" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"><i class="fas fa-quote-left"></i></div>
+                <p>"The website Mubarak built for **Foot on Kili Tanzania** is breathtaking. He captured the adventure spirit perfectly, and our booking conversion has increased by 40% since launch!"</p>
+                <h4>— Mussa B., Safari Director</h4>
+            </div>
+
+            <div class="testi-card testimonial-slide" style="display: none;">
+                <div class="quote-icon" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"><i class="fas fa-quote-left"></i></div>
+                <p>"Working with Mubarak on the **QZ Rent A Car** platform was a breeze. He integrated a complex booking system with a clean UI. He is definitely our go-to developer now."</p>
+                <h4>— K Qamar., Operations Manager</h4>
+            </div>
+
+            <div class="testi-card testimonial-slide" style="display: none;">
+                <div class="quote-icon" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"><i class="fas fa-quote-left"></i></div>
+                <p>"Have a grate Experience Working with Mubarak on the **Skyline Adventure Tours**.He deliver the project on time and full fill all my demands."</p>
+                <h4>— Ali Raza., Owner</h4>
+            </div>
+
+            <div class="testi-card testimonial-slide" style="display: none;">
+                <div class="quote-icon" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"><i class="fas fa-quote-left"></i></div>
+                <p>"For **Gelexy Construction**, we needed a corporate yet modern look. Mubarak delivered a site that truly reflects our brand's strength. Fast, responsive, and SEO friendly!"</p>
+                <h4>— Engr Jhon Adama., Project Head</h4>
+            </div>
+
+            <div class="testi-card testimonial-slide" style="display: none;">
+                <div class="quote-icon" style="color: var(--accent); font-size: 2rem; margin-bottom: 20px;"><i class="fas fa-quote-left"></i></div>
+                <p>"Mubarak is a genius. He took our Shopify store from zero to hero. The design for **Brightline Creations** is modern and the speed is incredible!"</p>
+                <h4>— Dhamika Thikanan, E-commerce Owner</h4>
+            </div>
+
+            <div class="testi-dots" style="margin-top: 30px; display: flex; justify-content: center; gap: 10px;">
+                <span class="dot active" onclick="currentSlide(0)" style="height: 12px; width: 12px; background: var(--accent); border-radius: 50%; cursor: pointer;"></span>
+                <span class="dot" onclick="currentSlide(1)" style="height: 12px; width: 12px; background: #333; border-radius: 50%; cursor: pointer;"></span>
+                <span class="dot" onclick="currentSlide(2)" style="height: 12px; width: 12px; background: #333; border-radius: 50%; cursor: pointer;"></span>
+                <span class="dot" onclick="currentSlide(3)" style="height: 12px; width: 12px; background: #333; border-radius: 50%; cursor: pointer;"></span>
+                <span class="dot" onclick="currentSlide(4)" style="height: 12px; width: 12px; background: #333; border-radius: 50%; cursor: pointer;"></span>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("testimonial-slide");
+        const dots = document.getElementsByClassName("dot");
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+                dots[i].style.background = "#333";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].style.background = "var(--accent)";
+            setTimeout(showSlides, 5000); // Change slide every 5 seconds
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                dots[i].style.background = "#333";
+            }
+            slides[n].style.display = "block";
+            dots[n].style.background = "var(--accent)";
+        }
+
+        // Initialize slider
+        showSlides();
+    </script>
+
+    <footer id="contact">
+        <div class="footer-flex">
+            <div>
+                <p style="color: var(--accent); font-weight: 700;">HAVE A PROJECT IN MIND?</p>
+                <h2 style="font-size: 2.5rem; color:white;">Let's create <br> something great.</h2>
+                <p style="margin: 10px 0;">+923408019976</p>
+                <p>armanali0312112@gmail.com</p>
+            </div>
+            <div class="socials">
+                <a href="https://www.facebook.com/share/1D2nF5JdyZ/"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/ali-mubarak12"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.tiktok.com/@codeaddict5?_r=1&_t=ZN-92vftptvLXy"><i class="fab fa-tiktok"></i></a>
+                <a href="https://github.com/armanali0312112-byte"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 50px; color: #444;">&copy; 2026 Mubarak Ali . All Rights Reserved.</p>
+    </footer>
+
+    <a href="https://wa.me/923408019976" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Mobile Toggle Menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Skill Animation on Scroll
+        const progressBars = document.querySelectorAll('.skill-progress');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-done');
+                }
+            });
+        }, { threshold: 0.5 });
+        progressBars.forEach(bar => observer.observe(bar));
+
+        // Close menu on click link (for mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
